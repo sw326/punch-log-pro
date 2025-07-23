@@ -14,17 +14,20 @@ Punch Log Pro는 **React**와 **Supabase**를 활용하여 만든,
 - **일반 사원**: 오늘의 출근/퇴근 기록, 내역 확인
 - **관리자**: 모든 직원의 출퇴근 내역을 이름/날짜별로 관리 및 정렬
 
-**주요 기술 스택**
-- Vite
-- React
-- TypeScript
-- shadcn-ui
-- Tailwind CSS
-- Supabase
+---
 
-**사용한 AI 툴**
-- Lovable AI
-- Cursor AI
+## 🛠️ 기술 스택 & 사용 툴
+
+<p>
+  <img src="https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white" alt="Vite" />
+  <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black" alt="React" />
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/shadcn--ui-111827?style=flat-square" alt="shadcn-ui" />
+  <img src="https://img.shields.io/badge/Tailwind%20CSS-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/Supabase-3ECF8E?style=flat-square&logo=supabase&logoColor=white" alt="Supabase" />
+  <img src="https://img.shields.io/badge/Lovable%20AI-FF6B81?style=flat-square" alt="Lovable AI" />
+  <img src="https://img.shields.io/badge/Cursor%20AI-000000?style=flat-square" alt="Cursor AI" />
+</p>
 
 ---
 
