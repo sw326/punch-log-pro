@@ -13,6 +13,7 @@ import { ko } from 'date-fns/locale';
 
 interface Profile {
   id: string;
+  user_id: string;
   name: string;
   email: string;
   employee_id: string;
@@ -85,6 +86,7 @@ export default function AdminDashboard({ user, onLogout }: Props) {
         ...record,
         profiles: profiles.find(p => p.user_id === record.user_id) || {
           id: '',
+          user_id: record.user_id,
           name: '알 수 없음',
           email: '',
           employee_id: ''
@@ -296,7 +298,7 @@ export default function AdminDashboard({ user, onLogout }: Props) {
                 <SelectContent>
                   <SelectItem value="all">전체 직원</SelectItem>
                   {employees.map((employee) => (
-                    <SelectItem key={employee.id} value={employee.id}>
+                    <SelectItem key={employee.id} value={employee.user_id}>
                       {employee.name} ({employee.employee_id})
                     </SelectItem>
                   ))}
