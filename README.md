@@ -47,7 +47,7 @@ Punch Log Pro는 **React**와 **Supabase**를 활용하여 만든,
 
 ---
 
-## 실행 방법 (비전공자도 쉽게!)
+## 실행 방법
 
 ### 설치 없이 바로 사용하기
 - 👉 [배포된 서비스 바로가기](https://punch-log-pro.lovable.app)
