@@ -241,9 +241,13 @@ export default function AuthPage() {
                       </Button>
                     </div>
                     
-                    <div className="text-xs text-muted-foreground text-center">
-                      <p>테스트 계정이 없다면 먼저 회원가입을 해주세요.</p>
-                      <p className="mt-1">관리자: admin@test.com | 직원: employee@test.com</p>
+                    <div className="text-xs text-muted-foreground text-center space-y-2">
+                      <p className="font-medium">🔑 테스트 계정 정보:</p>
+                      <div className="bg-muted/50 p-3 rounded-md text-left space-y-1">
+                        <p><span className="font-medium">관리자:</span> admin@test.com / password123</p>
+                        <p><span className="font-medium">직원:</span> employee@test.com / password123</p>
+                      </div>
+                      <p className="text-primary">⚠️ 테스트 계정이 없다면 먼저 위 정보로 회원가입을 해주세요!</p>
                     </div>
                   </div>
                 </CardContent>
