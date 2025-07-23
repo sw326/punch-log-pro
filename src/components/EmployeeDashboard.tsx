@@ -8,7 +8,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Clock, LogIn, LogOut, Calendar, User, Building } from 'lucide-react';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
-import DemoDataCreator from './DemoDataCreator';
+// DemoDataCreator import 제거
 
 interface Profile {
   id: string;
@@ -227,8 +227,7 @@ export default function EmployeeDashboard({ user, onLogout }: Props) {
       </div>
 
       <div className="container mx-auto px-4 py-8">
-        {/* Demo Data Creator */}
-        <DemoDataCreator user={user} onDataAdded={fetchAttendanceRecords} />
+        {/* DemoDataCreator 제거됨 */}
         
         {/* Today's Status */}
         <div className="grid md:grid-cols-2 gap-8 mb-8">
