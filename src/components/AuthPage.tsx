@@ -8,6 +8,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { Clock, Users, Shield, CheckCircle } from 'lucide-react';
 import heroImage from '@/assets/hero-image.jpg';
+import TestDataGuide from './TestDataGuide';
 
 export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
@@ -252,6 +253,11 @@ export default function AuthPage() {
                   </div>
                 </CardContent>
               </Card>
+              
+              {/* Test Data Guide */}
+              <div className="mt-8">
+                <TestDataGuide />
+              </div>
             </div>
           </div>
         </div>
