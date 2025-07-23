@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useNavigate } from 'react-router-dom';
@@ -13,55 +14,98 @@ const Index = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
+  // 사용자 역할을 조회하는 함수
+  const fetchUserRole = async (userId: string) => {
+    try {
+      console.log('Fetching user role for userId:', userId);
+      const { data: roleData, error } = await supabase
+        .from('user_roles')
+        .select('role')
+        .eq('user_id', userId)
+        .single();
+      
+      if (error) {
+        console.error('Error fetching user role:', error);
+        return 'employee'; // 기본값으로 employee 설정
+      }
+      
+      console.log('User role data:', roleData);
+      return roleData?.role || 'employee';
+    } catch (error) {
+      console.error('Exception while fetching user role:', error);
+      return 'employee';
+    }
+  };
+
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        setSession(session);
-        setUser(session?.user ?? null);
+    console.log('Setting up auth state change listener');
+    
+    // 현재 세션 확인
+    const initializeAuth = async () => {
+      try {
+        const { data: { session }, error } = await supabase.auth.getSession();
+        console.log('Initial session check:', { session, error });
         
         if (session?.user) {
-          const { data: roleData } = await supabase
-            .from('user_roles')
-            .select('role')
-            .eq('user_id', session.user.id)
-            .single();
+          setSession(session);
+          setUser(session.user);
           
-          setUserRole(roleData?.role || 'employee');
+          const role = await fetchUserRole(session.user.id);
+          setUserRole(role);
+          console.log('User role set to:', role);
         } else {
+          setSession(null);
+          setUser(null);
           setUserRole(null);
         }
+      } catch (error) {
+        console.error('Error initializing auth:', error);
+      } finally {
         setLoading(false);
+      }
+    };
+
+    // 인증 상태 변경 리스너 설정
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        console.log('Auth state changed:', { event, session });
+        
+        if (session?.user) {
+          setSession(session);
+          setUser(session.user);
+          
+          const role = await fetchUserRole(session.user.id);
+          setUserRole(role);
+          console.log('Auth change - User role set to:', role);
+          setLoading(false);
+        } else {
+          setSession(null);
+          setUser(null);
+          setUserRole(null);
+          setLoading(false);
+        }
       }
     );
 
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      if (session?.user) {
-        supabase
-          .from('user_roles')
-          .select('role')
-          .eq('user_id', session.user.id)
-          .single()
-          .then(({ data }) => {
-            setUserRole(data?.role || 'employee');
-            setLoading(false);
-          });
-      } else {
-        setLoading(false);
-      }
-    });
+    // 초기 인증 상태 확인
+    initializeAuth();
 
-    return () => subscription.unsubscribe();
+    return () => {
+      console.log('Cleaning up auth subscription');
+      subscription.unsubscribe();
+    };
   }, []);
 
   const handleLogout = async () => {
+    console.log('Logging out user');
     await supabase.auth.signOut();
     setUser(null);
     setSession(null);
     setUserRole(null);
     navigate('/auth');
   };
+
+  console.log('Current state:', { loading, user: !!user, userRole });
 
   if (loading) {
     return (
@@ -74,14 +118,17 @@ const Index = () => {
     );
   }
 
-  if (!user) {
+  if (!user || !session) {
+    console.log('No user or session, showing AuthPage');
     return <AuthPage />;
   }
 
   if (userRole === 'admin') {
+    console.log('Rendering AdminDashboard');
     return <AdminDashboard user={user} onLogout={handleLogout} />;
   }
 
+  console.log('Rendering EmployeeDashboard');
   return <EmployeeDashboard user={user} onLogout={handleLogout} />;
 };
 
