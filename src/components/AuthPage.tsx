@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Separator } from '@/components/ui/separator';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { useNavigate } from 'react-router-dom';
 import { Clock, Users, Shield, CheckCircle } from 'lucide-react';
 import heroImage from '@/assets/hero-image.jpg';
 import TestDataGuide from './TestDataGuide';
@@ -17,6 +18,7 @@ export default function AuthPage() {
   const [name, setName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,6 +42,7 @@ export default function AuthPage() {
             title: "로그인 성공",
             description: "환영합니다!",
           });
+          navigate('/');
         }
       } else {
         const { error } = await supabase.auth.signUp({
@@ -95,6 +98,7 @@ export default function AuthPage() {
         title: "테스트 로그인 성공",
         description: "환영합니다!",
       });
+      navigate('/');
     }
     setIsLoading(false);
   };
