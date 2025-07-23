@@ -46,11 +46,18 @@ Punch Log Pro는 **React**와 **Supabase**를 활용하여 만든,
 
 ## 실행 방법 (비전공자도 쉽게!)
 
-### 1. 준비물
+### 설치 없이 바로 사용하기
+- 👉 [배포된 서비스 바로가기](https://punch-log-pro.lovable.app)
+
+---
+
+### 직접 실행하고 싶다면
+
+#### 1. 준비물
 - [Node.js](https://nodejs.org/ko/) 설치 (최신 LTS 권장)
 - [Git](https://git-scm.com/downloads) 설치
 
-### 2. 프로젝트 다운로드
+#### 2. 프로젝트 다운로드
 
 아래 명령어를 차례대로 복사해서 **명령 프롬프트(cmd)**에 붙여넣으세요.
 
@@ -63,19 +70,19 @@ git clone https://github.com/sw326/punch-log-pro.git
 cd punch-log-pro
 ```
 
-### 3. 의존성 설치
+#### 3. 의존성 설치
 
 ```bash
 npm install
 ```
 
-### 4. 개발 서버 실행
+#### 4. 개발 서버 실행
 
 ```bash
 npm run dev
 ```
 
-### 5. 브라우저에서 접속
+#### 5. 브라우저에서 접속
 
 터미널에 표시되는 주소(기본: http://localhost:5173)를 복사해서  
 브라우저 주소창에 붙여넣으면 서비스가 실행됩니다.
